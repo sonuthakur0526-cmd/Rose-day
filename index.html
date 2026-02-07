@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day 🌹</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* START SCREEN */
+#startScreen{
+  position:fixed;
+  inset:0;
+  background:#ff1e56;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+#bigHeart{
+  font-size:120px;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* MAIN PAGE */
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.wrap{
+  width:90%;
+  max-width:800px;
+  text-align:center;
+}
+
+h1{
+  color:#fff;
+  font-size:2.4rem;
+  margin-bottom:20px;
+  font-weight:700;
+}
+
+.postcard{
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.25);
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+.photo-box img{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:20px;
+}
+
+/* TYPING TEXT */
+#typingText{
+  font-weight:700;
+  color:#444;
+  text-align:left;
+  line-height:1.8;
+  white-space:pre-line;
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  background:#e63946;
+  color:#fff;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* POPUP */
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+#popup div{
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* ROSE PETALS */
+.rose{
+  position:absolute;
+  top:-50px;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- START HEART -->
+<div id="startScreen">
+  <div id="bigHeart">❤️</div>
+</div>
+
+<div class="wrap">
+  <h1>Happy Rose Day 🌹</h1>
+
+  <div class="postcard">
+    <div class="photo-box">
+      <img src="https://i.postimg.cc/Tw7RV8mS/1768713902813.png" alt="Our Photo">
+    </div>
+
+    <p id="typingText"></p>
+
+    <button onclick="showPopup()">I Love You ❤️🫀</button>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div id="popup" onclick="this.style.display='none'">
+  <div>🌹 You are my forever 🌹</div>
+</div>
+
+<script>
+/* HEART CLICK */
+document.getElementById("bigHeart").onclick = ()=>{
+  document.getElementById("startScreen").style.display="none";
+  document.body.style.display="flex";
+  typeText();
+  createRoses();
+};
+
+/* TYPING TEXT */
+const text = `My Love,
+
+Every rose reminds me of you.
+Your smile colors my world with happiness.
+
+You are my comfort,
+my peace,
+and my forever.
+
+Happy Rose Day 🌹`;
+
+let i=0;
+function typeText(){
+  if(i < text.length){
+    document.getElementById("typingText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText,40);
+  }
+}
+
+/* POPUP */
+function showPopup(){
+  document.getElementById("popup").style.display="flex";
+}
+
+/* ROSE RAIN */
+function createRoses(){
+  setInterval(()=>{
+    const rose=document.createElement("div");
+    rose.className="rose";
+    rose.innerHTML="🌹";
+    rose.style.left=Math.random()*100+"%";
+    rose.style.animationDuration=(3+Math.random()*4)+"s";
+    document.body.appendChild(rose);
+    setTimeout(()=>rose.remove(),7000);
+  },300);
+}
+</script>
+
+</body>
+</html>
